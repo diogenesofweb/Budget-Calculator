@@ -1,0 +1,120 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <style>
+      .input-field label {
+        font-size: 1.3rem;
+      }
+      .container {
+        margin-top: 30px;
+      }
+    </style>
+    <title>Budget Calculator</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper green darken-4">
+        <a href="#" class="brand-logo center">Budget Calculator</a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <!--budget-->
+      <div class="row section">
+        <div class="col s12 m8 l6 xl5 offset-m2">
+          <form class="card-panel" id="budget-form">
+            <div class="input-field">
+              <input id="budget" type="text" class="validate" />
+              <label class="active" for="budget">Budget Amount</label>
+            </div>
+            <div class="center">
+              <button class="btn green darken-2" type="submit" name="action">
+                <i class="material-icons left">attach_money</i> submit
+                <i class="material-icons right">attach_money</i>
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="col s12 l6 offset-xl1">
+          <table class="centered">
+            <thead>
+              <tr>
+                <th>Budget</th>
+                <th>Total Expenses</th>
+                <th>Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <i class="material-icons green-text text-darken-2"
+                    >attach_money</i
+                  >
+                </td>
+                <td><i class="material-icons red-text">payment</i></td>
+                <td><i class="material-icons">exposure</i></td>
+              </tr>
+              <tr>
+                <td id="budget-val"></td>
+                <td id="expenses-val"></td>
+                <td id="balance-val"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!--expenses-->
+      <div class="row section">
+        <div class="col s12 m8 l6 xl5 offset-m2">
+          <form class="card-panel" id="expense-form">
+            <div class="input-field">
+              <input id="expense-name" type="text" class="validate" />
+              <label class="active" for="expense-name"
+                >Expense Description</label
+              >
+            </div>
+            <div class="input-field">
+              <input id="expense-amount" type="text" class="validate" />
+              <label class="active" for="expense-amount">Expense Amount</label>
+            </div>
+            <div class="center">
+              <button class="btn red" type="submit" id="addbtn">
+                <i class="material-icons left">payment</i> Add Expense
+                <i class="material-icons right">payment</i>
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="col s12 l6 offset-xl1">
+          <table class="centered">
+            <thead>
+              <tr>
+                <th>Expense</th>
+                <th>Amount</th>
+                <th>
+                  <a class="btn red" id="delAll"
+                    ><i class="material-icons left">delete_forever</i>All</a
+                  >
+                </th>
+              </tr>
+            </thead>
+            <tbody id="expense-list"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
