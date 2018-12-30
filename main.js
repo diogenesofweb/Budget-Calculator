@@ -121,6 +121,13 @@ const addExpenseRow = expense => {
     `;
 
   table.appendChild(expenseRow);
+
+  expenseRow
+    .querySelector("i.material-icons.edit")
+    .addEventListener("click", e => updateEvent(e));
+  expenseRow
+    .querySelector("i.material-icons.delete")
+    .addEventListener("click", e => deleteEvent(e));
 };
 
 // Event Listeners
@@ -175,7 +182,7 @@ document.querySelector("#budget-form").addEventListener("submit", e => {
 });
 
 // revome all expenses at once
-document.querySelector("#delAll").addEventListener("click", () => {
+document.getElementById("delAll").addEventListener("click", () => {
   removeExpenses();
   displayCalculator();
   let table = document.getElementById("expense-list");
@@ -185,46 +192,31 @@ document.querySelector("#delAll").addEventListener("click", () => {
 });
 
 // delete expense
-const deleteExpenseClick = () => {
-  const deleteIcons = document.getElementsByClassName("material-icons delete");
-
-  Array.from(deleteIcons).forEach(e => {
-    e.addEventListener("click", e => {
-      const id = e.target.parentElement.parentElement.parentElement.id;
-
-      deleteExpense(id);
-      document.getElementById(`${id}`).remove();
-      displayCalculator();
-    });
-  });
+const deleteEvent = e => {
+  const id = e.target.parentElement.parentElement.parentElement.id;
+  deleteExpense(id);
+  document.getElementById(`${id}`).remove();
+  displayCalculator();
 };
 
 // fake update expense
-const updateExpenseClick = () => {
-  const editIcons = document.getElementsByClassName("material-icons edit");
+const updateEvent = e => {
+  const id = e.target.parentElement.parentElement.parentElement.id;
+  const expense = getExpenses().find(e => e.id == id);
+  const { name, amount } = expense;
 
-  Array.from(editIcons).forEach(e => {
-    e.addEventListener("click", e => {
-      const id = e.target.parentElement.parentElement.parentElement.id;
-      const expense = getExpenses().find(e => e.id == id);
-      const { name, amount } = expense;
+  document.getElementById("expense-name").value = name;
+  document.getElementById("expense-amount").value = amount;
 
-      document.querySelector("#expense-name").value = name;
-      document.querySelector("#expense-amount").value = amount;
-
-      // just deleting expense
-      deleteExpense(id);
-      document.getElementById(`${id}`).remove();
-      displayCalculator();
-    });
-  });
+  // just deleting expense
+  deleteExpense(id);
+  document.getElementById(`${id}`).remove();
+  displayCalculator();
 };
 
 // ready or not here i come
 const ready = () => {
   displayCalculator();
   displayExpenses();
-  updateExpenseClick();
-  deleteExpenseClick();
 };
 document.addEventListener("DOMContentLoaded", ready());
